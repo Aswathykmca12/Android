@@ -1,0 +1,122 @@
+package com.example.form;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity
+{
+    Button BU1,BU2;
+    EditText G1,G2,G3,G4,G5,G6;
+    RadioButton RB1,RB2;
+    CheckBox CB2,CB3,CB4;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        BU1=(Button)findViewById(R.id.BU1);
+        BU2=(Button) findViewById(R.id.BU2);
+        G1=(EditText) findViewById(R.id.G1);
+        G2=(EditText)findViewById(R.id.G2);
+        G3=(EditText)findViewById(R.id.G3);
+        G4=(EditText)findViewById(R.id.G4);
+        G5=(EditText)findViewById(R.id.G5);
+        G6=(EditText)findViewById(R.id.G6);
+        RB1=(RadioButton) findViewById(R.id.RB1);
+        RB2=(RadioButton) findViewById(R.id.RB2);
+        CB2=(CheckBox) findViewById(R.id.CB2);
+        CB3=(CheckBox) findViewById(R.id.CB3);
+        CB4=(CheckBox) findViewById(R.id.CB4);
+       BU1.setOnClickListener(new View.OnClickListener()
+       {
+           @Override
+           public void onClick(View view)
+           {
+               String val = G1.getText().toString().trim();
+               String checkspaces = "Aw{1,20}z";
+               if (val.isEmpty())
+               {
+                   G1.setError("Field can not be empty");
+               } else if (val.length() > 20)
+               {
+                   G1.setError("Username is too large!");
+
+               } else if (!val.matches(checkspaces))
+               {
+                   G1.setError("No White spaces and special characters  are allowed!");
+
+               } else
+               {
+                   G1.setError(null);
+               }
+               String mail = G5.getText().toString().trim();
+               String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
+               if (mail.isEmpty())
+               {
+                   G5.setError("Field can not be empty");
+
+               } else if (!mail.matches(checkEmail))
+               {
+                   G5.setError("Invalid Email!");
+               } else
+               {
+                   G5.setError(null);
+               }
+               String moobno = G4.getText().toString().trim();
+               String checkspace = "Aw{1,20}z";
+               if (moobno.isEmpty())
+               {
+                   G4.setError("Enter valid phone number");
+               } else if (!moobno.matches(checkspaces))
+               {
+                   G4.setError("No White spaces are allowed!");
+               } else
+               {
+                   G4.setError(null);
+               }
+               String passss = G6.getText().toString().trim();
+               String checkPassword = "^" +
+                       //"(?=.*[0-9])" +         //at least 1 digit
+                       //"(?=.*[a-z])" +         //at least 1 lower case letter
+                       //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                       "(?=.*[a-zA-Z])" +      //any letter
+                       //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+                       "(?=S+$)" +           //no white spaces
+                       ".{4,}" +               //at least 4 characters
+                       "$";
+               if (passss.isEmpty())
+               {
+                   G6.setError("Field can not be empty");
+               } else if (!passss.matches(checkPassword))
+               {
+                   G6.setError("Password should contain 4 characters!");
+               } else
+               {
+                   G6.setError(null);
+               }
+               String adra = G3.getText().toString().trim();
+               if (adra.isEmpty())
+               {
+                   G3.setError("Field can not be empty");
+
+               } else
+               {
+                   G3.setError(null);
+               }
+
+           }
+
+       });
+
+    }
+
